@@ -18,9 +18,7 @@ def settings() -> Settings:
 
 class TestAnalyzeText:
     def test_positive_sentiment(self, settings: Settings) -> None:
-        emotion, compound, rate, volume = analyze_text(
-            "This is fantastic news!", settings
-        )
+        emotion, compound, rate, volume = analyze_text("This is fantastic news!", settings)
         assert emotion == "positive"
         assert compound > 0.05
         assert rate > 160
@@ -36,9 +34,7 @@ class TestAnalyzeText:
         assert volume < 0.8
 
     def test_neutral_sentiment(self, settings: Settings) -> None:
-        emotion, compound, rate, volume = analyze_text(
-            "Meeting at 3 PM tomorrow.", settings
-        )
+        emotion, compound, rate, volume = analyze_text("Meeting at 3 PM tomorrow.", settings)
         assert emotion == "neutral"
         assert rate == 160
         assert volume == 0.8
@@ -49,7 +45,5 @@ class TestAnalyzeText:
         assert rate_strong >= rate_weak
 
     def test_volume_bounds(self, settings: Settings) -> None:
-        _, _, _, volume_neg = analyze_text(
-            "Terrible horrible awful disaster.", settings
-        )
+        _, _, _, volume_neg = analyze_text("Terrible horrible awful disaster.", settings)
         assert volume_neg >= 0.5

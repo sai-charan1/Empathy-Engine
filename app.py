@@ -1,7 +1,6 @@
 """FastAPI application for the Empathy Engine TTS service."""
 
 import logging
-from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse

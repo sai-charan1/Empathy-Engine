@@ -6,7 +6,7 @@ import hashlib
 import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal, Tuple
+from typing import Literal
 
 import pyttsx3
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -33,7 +33,7 @@ class EmotionConfig:
 def analyze_text(
     text: str,
     settings: Settings | None = None,
-) -> Tuple[Emotion, float, int, float]:
+) -> tuple[Emotion, float, int, float]:
     """
     Analyze sentiment with VADER and map to emotion + voice parameters.
 

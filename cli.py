@@ -1,30 +1,31 @@
-# cli.py
+"""CLI entry point for emotion-aware TTS."""
+
 import argparse
+import logging
 from pathlib import Path
 
-from engine import synthesize_to_file
+from empathy_engine.config import get_settings
+from empathy_engine.engine import synthesize_to_file
+
+logging.basicConfig(level=get_settings().log_level)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Empathy Engine - emotion-aware text-to-speech (CLI)"
+        description="Empathy Engine — emotion-aware text-to-speech (CLI)"
     )
-    parser.add_argument(
-        "text",
-        type=str,
-        help="Text to synthesize with emotion-aware TTS",
-    )
+    parser.add_argument("text", type=str, help="Text to synthesize")
     parser.add_argument(
         "--dir",
         type=str,
-        default="static/audio",
-        help="Output directory for audio files (default: static/audio)",
+        default=None,
+        help="Output directory (default: from settings / static/audio)",
     )
-
     args = parser.parse_args()
-    output_dir = Path(args.dir)
+    settings = get_settings()
+    output_dir = Path(args.dir) if args.dir else settings.audio_dir_resolved
 
-    result = synthesize_to_file(args.text, output_dir)
+    result = synthesize_to_file(args.text, output_dir, settings)
 
     print("=== Empathy Engine (CLI) ===")
     print(f"Text     : {result.text}")

@@ -1,0 +1,9 @@
+services:
+  empathy-engine:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./static/audio:/app/static/audio
+    env_file:
+      - .env

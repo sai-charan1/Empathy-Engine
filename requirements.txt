@@ -1,5 +1,8 @@
+# Install via: pip install -e ".[dev]"  (preferred)
+# Or minimal runtime:
 fastapi>=0.115.0
 uvicorn[standard]>=0.24.0
 vaderSentiment>=3.3.2
 pyttsx3>=2.90
 pydantic>=2.5.0
+pydantic-settings>=2.0.0
